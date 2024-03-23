@@ -1,6 +1,6 @@
 import {useState} from "react";
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword  } from 'firebase/auth';
-import { set, get } from "firebase/database";
+import {set, get, ref} from "firebase/database";
 import {auth, database} from "../FirebaseConfig.js";
 import {useNavigate} from "react-router-dom";
 import'./LoginPage.css';
@@ -42,17 +42,20 @@ export default function LoginPage() {
     };
 
     const makeInitialDatabaseEntry = async (user, userId) => {
-        // Only make inital entry if nothing exists first
-        const databasePath = "users/" + userId;
-        const snapshot = await get(database, databasePath);
+        // Only make initial entry if nothing exists first
+        const userDatabaseRef = ref(database, "users/" + userId);
+        const snapshot = await get(userDatabaseRef);
         if (snapshot.exists()) {
-            alert("ALREADY EXISTS");
+            console.log("USER ALREADY EXISTS");
             return
-        } else {
-            alert("DOESNT EXISTS");
         }
 
-        // set(database, "users/")
+        await set(userDatabaseRef, user.uid);
+
+        const dataDatabaseRef = ref(database, "data/" + user.uid);
+        await set(dataDatabaseRef, {
+            name: "Unnamed"
+        })
     }
 
     /**

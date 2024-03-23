@@ -1,8 +1,7 @@
 import {useLoaderData} from "react-router-dom";
-import { onAuthStateChanged } from "firebase/auth";
-import { ref, onValue } from "firebase/database";
-import {useEffect} from "react";
-import { auth, database } from "../FirebaseConfig.js";
+import {ref, onValue, get} from "firebase/database";
+import {useEffect, useRef, useState} from "react";
+import { database } from "../FirebaseConfig.js";
 import'./ProfilePage.css';
 
 /**
@@ -15,6 +14,12 @@ export async function loader({ params }) {
     return { userId };
 }
 
+async function getUID(userId) {
+    const userDatabaseRef = ref(database, "users/" + userId);
+    const uidSnapshot = await get(userDatabaseRef);
+    return uidSnapshot.val();
+}
+
 /**
  * ProfilePage that displays the habit/goal information for a user
  *
@@ -25,21 +30,26 @@ export async function loader({ params }) {
  */
 export default function ProfilePage({ isEditable }) {
     const { userId } = useLoaderData();
+    const [userData, setUserData] = useState(null);
 
+    // Update userData from firebase
     useEffect(() => {
-        const userDatabaseRef = ref(database, "users/" + userId);
+        // Get UID
+        getUID(userId).then((uid) => {
+            // Nothing in user
+            if (uid === null) {
+                //TODO: have 404 page
+                return
+            }
 
-        onValue(userDatabaseRef, (snapshot) => {
-            console.log("SNAPSHOT");
-            console.log(snapshot.val());
-            console.log(snapshot.exists());
-            console.log(snapshot.key);
+            const dataDatabaseRef = ref(database, "data/" + uid);
+            onValue(dataDatabaseRef, (snapshot) => {
+                setUserData(snapshot.val());
+                console.log(userData)
+            })
         })
-    })
+    }, []);
 
-    // useEffect(() => {
-    //     alert("UID: " + userId);
-    // })
 
     // useEffect(()=>{
     //     onAuthStateChanged(auth, (user) => {
@@ -67,5 +77,8 @@ export default function ProfilePage({ isEditable }) {
         <div>userId: {userId}</div>
 
         {isEditable ? <p>Editable!</p> : <p>NOT Editable!</p>}
+        {userData !== null ?
+            <div>TEST{userData.name}</div>
+        : null}
     </>
 }
