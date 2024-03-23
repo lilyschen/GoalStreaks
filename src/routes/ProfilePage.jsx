@@ -3,6 +3,7 @@ import { onAuthStateChanged } from "firebase/auth";
 import { ref, onValue } from "firebase/database";
 import {useEffect} from "react";
 import { auth, database } from "../FirebaseConfig.js";
+import'./ProfilePage.css';
 
 /**
  * Function to get the userID from the URL
@@ -58,8 +59,13 @@ export default function ProfilePage({ isEditable }) {
     // }, [])
 
     return <>
-        <div>profile page</div>
+        <div>
+            <h1>
+                GoalStreak
+            </h1>
+        </div>
         <div>userId: {userId}</div>
+
         {isEditable ? <p>Editable!</p> : <p>NOT Editable!</p>}
     </>
 }

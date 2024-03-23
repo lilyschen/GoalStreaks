@@ -3,6 +3,8 @@ import { createUserWithEmailAndPassword, signInWithEmailAndPassword  } from 'fir
 import { set, get } from "firebase/database";
 import {auth, database} from "../FirebaseConfig.js";
 import {useNavigate} from "react-router-dom";
+import'./LoginPage.css';
+import deskimage from "../images/desk1.jpg";
 
 
 export default function LoginPage() {
@@ -74,24 +76,33 @@ export default function LoginPage() {
     }
 
     return <>
-        <p>main page and login!</p>
-        <div>
-            <input
-                value={username}
-                type={"text"}
-                placeholder={"Enter username"}
-                onChange={(ev) => setUsername(ev.target.value)}></input>
-            <label>{usernameError}</label>
-        </div>
-        <div>
-            <input
-                value={password}
-                type={"password"}
-                placeholder={"Enter password"}
-                onChange={(ev) => setPassword(ev.target.value)}></input>
-            <label>{passwordError}</label>
-        </div>
-        <button onClick={() => {signInOrUp(true)}}>Sign Up</button>
-        <button onClick={() => {signInOrUp(false)}}>Sign In</button>
+        <header className="LoginPage-header">
+            <p>GoalStreak Login</p>
+            <div>
+                <input
+                    value={username}
+                    type={"text"}
+                    placeholder={"Enter username"}
+                    onChange={(ev) => setUsername(ev.target.value)}></input>
+                <label>{usernameError}</label>
+            </div>
+            <div>
+                <input
+                    value={password}
+                    type={"password"}
+                    placeholder={"Enter password"}
+                    onChange={(ev) => setPassword(ev.target.value)}></input>
+                <label>{passwordError}</label>
+            </div>
+            <button onClick={() => {
+                signInOrUp(true)
+            }}>Sign Up
+            </button>
+            <button onClick={() => {
+                signInOrUp(false)
+            }}>Sign In
+            </button>
+        </header>
+
     </>
 }
