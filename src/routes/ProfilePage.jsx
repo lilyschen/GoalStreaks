@@ -117,7 +117,7 @@ export default function ProfilePage({ isEditable }) {
     }
 
     return <>
-        <header className="ProfilePage-header">
+        <div className="ProfilePage-header">
         <div>
             <h1>
                 {userId.charAt(0).toUpperCase() + userId.substring(1)}'s GoalStreak
@@ -132,12 +132,14 @@ export default function ProfilePage({ isEditable }) {
                 {userData.goals !== undefined ?
                     <GoalList goals={userData.goals} uid={userData.uid} isEditable={isEditable}/>
                 : null}
-                {isEditable ? <button onClick={addNewGoal}>Add new goal</button> : null}
+                {isEditable ? <button type="button" className="btn btn-secondary btn-lg" onClick={addNewGoal}>Add new goal</button> : null}
             </>
         : null}
             {isEditable ? <>
                 <p>Link to share: <a href={getShareLink()}>{getShareLink()}</a>
-                    <button onClick={handleCopy}>Copy Link</button>
+                    <button type="button" className="btn btn-outline-dark" onClick={handleCopy}>
+                        <i className="bi bi-copy"></i>
+                    </button>
                 </p>
                 <div>
                     <FacebookShareButton url={getShareLink()}>
@@ -158,8 +160,8 @@ export default function ProfilePage({ isEditable }) {
                 </div>
 
             </> : null}
-            {isEditable ? <button onClick={logOut}>Log Out</button> : null}
-        </header>
+            {isEditable ? <button type="button" className="btn btn-secondary" onClick={logOut}>Log Out</button> : null}
+        </div>
     </>
 }
 

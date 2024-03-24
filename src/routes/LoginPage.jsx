@@ -79,6 +79,7 @@ export default function LoginPage() {
             <p id="title">GoalStreak Login</p>
             <div>
                 <input
+                    className="form-control"
                     value={username}
                     type={"text"}
                     placeholder={"Enter username"}
@@ -87,6 +88,7 @@ export default function LoginPage() {
             </div>
             <div>
                 <input
+                    className="form-control"
                     value={password}
                     type={"password"}
                     placeholder={"Enter password"}
@@ -94,11 +96,11 @@ export default function LoginPage() {
                 <p className="errorMessage">{passwordError}</p>
             </div>
             <div id="signInButtons">
-                <button onClick={() => {
+                <button type="button" className="btn btn-primary" onClick={() => {
                     signInOrUp(true)
                 }}>Sign Up
                 </button>
-                <button onClick={() => {
+                <button type="button" className="btn btn-success" onClick={() => {
                     signInOrUp(false)
                 }}>Sign In
                 </button>
