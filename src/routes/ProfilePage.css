@@ -14,6 +14,7 @@
     font-family: Gill Sans, sans-serif;
     font-weight: bold;
     /*background-color: #697E7C;*/
+    background-attachment : fixed;
 }
 
 button {
@@ -24,4 +25,24 @@ button {
 
 button:hover {
     background-color: #75979C;
+}
+
+.Goal-header {
+    display: flex;
+    flex-direction: column;
+    font-size: calc(5px + 2vmin);
+    color: black;
+    font-family: "Gill Sans", sans-serif;
+    font-weight: 400;
+    margin-bottom: 13px;
+    padding: 10px;
+    border-radius: 50px;
+}
+
+li {
+    border-radius: 15px;
+}
+
+ul {
+    list-style: none;
 }
