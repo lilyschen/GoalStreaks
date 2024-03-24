@@ -81,7 +81,7 @@ export default function ProfilePage({ isEditable }) {
         {userData !== null ?
             <>
                 <p>Name: {userData.name}</p>
-                <GoalList goals={userData.goals}/>
+                <GoalList goals={userData.goals} isEditable={isEditable}/>
                 <button>Add new goal</button>
             </>
         : null}
