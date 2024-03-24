@@ -23,7 +23,7 @@ export default function LoginPage() {
             return
         }
 
-        let fakeEmail = username.trim() + "@goalstreaks.com";
+        let fakeEmail = username.trim().toLowerCase() + "@goalstreaks.com";
         let func = isSignUp ? createUserWithEmailAndPassword : signInWithEmailAndPassword;
 
         await func(auth, fakeEmail, password.trim())
@@ -31,7 +31,7 @@ export default function LoginPage() {
                 // signed in!
                 const user = userCredential.user
                 console.log(user);
-                await makeInitialDatabaseEntry(user, username.trim())
+                await makeInitialDatabaseEntry(user, username.trim().toLowerCase())
                 navigate(username.trim() + "/edit");
             }).catch((error) => {
                 alert("Error: " + error.message);
