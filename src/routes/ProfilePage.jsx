@@ -82,7 +82,7 @@ export default function ProfilePage({ isEditable }) {
         const goalObject = {
             name: newGoalName.trim(),
             lastdate: yesterdaysDate.getUTCMilliseconds(),
-            streak: 1,
+            streak: 0,
         }
 
         const goalRef = ref(database, "data/" + userData.uid + "/goals/");
