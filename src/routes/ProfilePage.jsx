@@ -1,5 +1,5 @@
 import {useLoaderData, useNavigate} from "react-router-dom";
-import {ref, onValue, get} from "firebase/database";
+import {ref, onValue, get, set, child} from "firebase/database";
 import {useEffect, useState} from "react";
 import {auth, database} from "../FirebaseConfig.js";
 import'./ProfilePage.css';
@@ -66,6 +66,38 @@ export default function ProfilePage({ isEditable }) {
         })
     }, []);
 
+    const addNewGoal = async () => {
+        // Get the name from the user
+        let newGoalName = window.prompt("Enter the name for your goal");
+
+        // Validate the name of the goal has at least one character
+        if (newGoalName === null || !/^.+$/.test(newGoalName.trim())) {
+            alert("Must enter a name for the goal");
+            return
+        }
+
+        // Create new goal
+        let yesterdaysDate = new Date();
+        yesterdaysDate.setDate(yesterdaysDate.getDate() - 1)
+        const goalObject = {
+            name: newGoalName.trim(),
+            lastdate: yesterdaysDate.getUTCMilliseconds(),
+            streak: 1,
+        }
+
+        const goalRef = ref(database, "data/" + userData.uid + "/goals/");
+        const goalSnapshot = await get(goalRef);
+        let indexToInsert = 0;
+        if (goalSnapshot.exists()) {
+            indexToInsert = goalSnapshot.val().length;
+        }
+
+        await set(child(goalRef, "" + indexToInsert), goalObject).catch((error) => {
+            alert(error)
+            return
+        })
+    }
+
     const logOut = async () => {
         await auth.signOut();
         navigate("/")
@@ -88,8 +120,10 @@ export default function ProfilePage({ isEditable }) {
         {userData !== null ?
             <>
                 {/*<p>Name: {userData.name}</p>*/}
-                <GoalList goals={userData.goals} uid={userData.uid} isEditable={isEditable}/>
-                <button>Add new goal</button>
+                {userData.goals !== undefined ?
+                    <GoalList goals={userData.goals} uid={userData.uid} isEditable={isEditable}/>
+                : null}
+                {isEditable ? <button onClick={addNewGoal}>Add new goal</button> : null}
             </>
         : null}
         </header>
