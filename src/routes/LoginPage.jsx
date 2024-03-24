@@ -3,7 +3,7 @@ import { createUserWithEmailAndPassword, signInWithEmailAndPassword  } from 'fir
 import {set, get, ref} from "firebase/database";
 import {auth, database} from "../FirebaseConfig.js";
 import {useNavigate} from "react-router-dom";
-import'./LoginPage.css';
+import './LoginPage.css';
 
 
 export default function LoginPage() {
@@ -76,14 +76,14 @@ export default function LoginPage() {
 
     return <>
         <header className="LoginPage-header">
-            <p>GoalStreak Login</p>
+            <p id="title">GoalStreak Login</p>
             <div>
                 <input
                     value={username}
                     type={"text"}
                     placeholder={"Enter username"}
                     onChange={(ev) => setUsername(ev.target.value)}></input>
-                <label>{usernameError}</label>
+                <p className="errorMessage">{usernameError}</p>
             </div>
             <div>
                 <input
@@ -91,16 +91,18 @@ export default function LoginPage() {
                     type={"password"}
                     placeholder={"Enter password"}
                     onChange={(ev) => setPassword(ev.target.value)}></input>
-                <label>{passwordError}</label>
+                <p className="errorMessage">{passwordError}</p>
             </div>
-            <button onClick={() => {
-                signInOrUp(true)
-            }}>Sign Up
-            </button>
-            <button onClick={() => {
-                signInOrUp(false)
-            }}>Sign In
-            </button>
+            <div id="signInButtons">
+                <button onClick={() => {
+                    signInOrUp(true)
+                }}>Sign Up
+                </button>
+                <button onClick={() => {
+                    signInOrUp(false)
+                }}>Sign In
+                </button>
+            </div>
         </header>
 
     </>
