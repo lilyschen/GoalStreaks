@@ -45,29 +45,17 @@ export default function ProfilePage({ isEditable }) {
 
             const dataDatabaseRef = ref(database, "data/" + uid);
             onValue(dataDatabaseRef, (snapshot) => {
-                setUserData(snapshot.val());
-                console.log(snapshot.val())
+                setUserData({
+                    ...snapshot.val(),
+                    uid: uid
+                });
+                console.log({
+                    ...snapshot.val(),
+                    uid: uid
+                })
             })
         })
     }, []);
-
-
-    // useEffect(()=>{
-    //     onAuthStateChanged(auth, (user) => {
-    //         if (user) {
-    //             // User is signed in, see docs for a list of available properties
-    //             // https://firebase.google.com/docs/reference/js/firebase.User
-    //             const email = user.email;
-    //             // ...
-    //             alert("logged in user: " + email);
-    //         } else {
-    //             // User is signed out
-    //             // ...
-    //             alert("user is logged out")
-    //         }
-    //     });
-    //
-    // }, [])
 
     return <>
         <header className="ProfilePage-header">
@@ -82,7 +70,7 @@ export default function ProfilePage({ isEditable }) {
         {userData !== null ?
             <>
                 <p>Name: {userData.name}</p>
-                <GoalList goals={userData.goals} isEditable={isEditable}/>
+                <GoalList goals={userData.goals} uid={userData.uid} isEditable={isEditable}/>
                 <button>Add new goal</button>
             </>
         : null}
