@@ -46,7 +46,7 @@ export default function ProfilePage({ isEditable }) {
             const dataDatabaseRef = ref(database, "data/" + uid);
             onValue(dataDatabaseRef, (snapshot) => {
                 setUserData(snapshot.val());
-                console.log(userData)
+                console.log(snapshot.val())
             })
         })
     }, []);
@@ -81,8 +81,10 @@ export default function ProfilePage({ isEditable }) {
         {userData !== null ?
             <>
                 <p>Name: {userData.name}</p>
-                <GoalList goals={userData.goals ?? []}/>
+                <GoalList goals={userData.goals}/>
+                <button>Add new goal</button>
             </>
-            : null}
+        : null}
     </>
 }
+
