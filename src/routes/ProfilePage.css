@@ -3,7 +3,7 @@
 }
 
 .ProfilePage-header {
-    background-image: url("../images/desk6.jpg");
+    background-image: url("../images/desk3.jpg");
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -13,6 +13,7 @@
     color: #75979C;
     font-family: Gill Sans, sans-serif;
     font-weight: bold;
+    /*background-color: #697E7C;*/
 }
 
 button {
