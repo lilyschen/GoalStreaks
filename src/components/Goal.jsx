@@ -15,13 +15,16 @@ export default function Goal({ goalData, uid, index, isEditable }) {
         currentDate.getFullYear() === lastCompletionDate.getFullYear() &&
         currentDate.getMonth() === lastCompletionDate.getMonth() &&
         currentDate.getDate() === lastCompletionDate.getDate();
-    // const lastCompleteDateString = lastCompletionDate.toLocaleDateString()
 
     const month = lastCompletionDate.toLocaleString('default', {month: 'long'});
     const date = lastCompletionDate.getDate()
     const year = lastCompletionDate.getFullYear();
-    const lastCompleteDateString =  month + " " + date + ", " + year;
 
+    let lastCompleteDateString =  month + " " + date + ", " + year;
+
+    if (lastCompletionDate.toDateString() === new Date(0).toDateString()) {
+        lastCompleteDateString = "Never";
+    }
 
     // Streak is broken if NOT complete AND if NOT previous day
     const isStreakBroken = !isComplete &&
@@ -49,7 +52,7 @@ export default function Goal({ goalData, uid, index, isEditable }) {
             <div>Streak: {goalData.streak}</div>
             <div>Last Completed: {lastCompleteDateString}</div>
             {isEditable && !isComplete ?
-                <button onClick={completeGoal}>Complete</button>
+                <button type="button" className="btn btn-light" onClick={completeGoal}>Complete</button>
                 : null}
         </header>
     </li>
