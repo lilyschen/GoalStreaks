@@ -47,7 +47,7 @@ export default function Goal({ goalData, uid, index, isEditable }) {
         <header className="Goal-header">
             <div>Goal: {goalData.name}</div>
             <div>Streak: {goalData.streak}</div>
-            <div>Last Completed: {lastCompleteDateString}</div>
+            {goalData.lastdate > 1000000 ? <div>Last Completed: {lastCompleteDateString}</div> : null}
             {isEditable && !isComplete ?
                 <button onClick={completeGoal}>Complete</button>
                 : null}
