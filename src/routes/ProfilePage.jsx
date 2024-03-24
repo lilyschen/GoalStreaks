@@ -1,8 +1,9 @@
 import {useLoaderData} from "react-router-dom";
 import {ref, onValue, get} from "firebase/database";
-import {useEffect, useRef, useState} from "react";
+import {useEffect, useState} from "react";
 import { database } from "../FirebaseConfig.js";
 import'./ProfilePage.css';
+import GoalList from "../components/GoalList.jsx";
 
 /**
  * Function to get the userID from the URL
@@ -78,7 +79,10 @@ export default function ProfilePage({ isEditable }) {
 
         {isEditable ? <p>Editable!</p> : <p>NOT Editable!</p>}
         {userData !== null ?
-            <div>TEST{userData.name}</div>
-        : null}
+            <>
+                <p>Name: {userData.name}</p>
+                <GoalList goals={userData.goals ?? []}/>
+            </>
+            : null}
     </>
 }
