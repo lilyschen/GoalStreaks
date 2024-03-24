@@ -29,6 +29,16 @@ function getShareLink() {
     }
 }
 
+    const handleCopy = async () => {
+        try {
+            await navigator.clipboard.writeText(getShareLink());
+            alert('Link copied to clipboard!');
+        } catch (err) {
+            console.error('Failed to copy:', err);
+            alert('Failed to copy link to clipboard');
+        }
+    };
+
 /**
  * ProfilePage that displays the habit/goal information for a user
  *
@@ -123,7 +133,9 @@ export default function ProfilePage({ isEditable }) {
             </>
         : null}
             {isEditable ? <>
-                <p>Link to share: <a href={getShareLink()}>{getShareLink()}</a></p>
+                <p>Link to share: <a href={getShareLink()}>{getShareLink()}</a>
+                    <button onClick={handleCopy}>Copy Link</button>
+                </p>
             </> : null}
             {isEditable ? <button onClick={logOut}>Log Out</button> : null}
         </header>
