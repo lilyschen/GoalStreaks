@@ -1,7 +1,7 @@
-import {useLoaderData} from "react-router-dom";
+import {useLoaderData, useNavigate} from "react-router-dom";
 import {ref, onValue, get} from "firebase/database";
 import {useEffect, useState} from "react";
-import { database } from "../FirebaseConfig.js";
+import {auth, database} from "../FirebaseConfig.js";
 import'./ProfilePage.css';
 import GoalList from "../components/GoalList.jsx";
 
@@ -30,6 +30,7 @@ async function getUID(userId) {
  * @constructor
  */
 export default function ProfilePage({ isEditable }) {
+    const navigate = useNavigate();
     const { userId } = useLoaderData();
     const [userData, setUserData] = useState(null);
 
@@ -57,6 +58,11 @@ export default function ProfilePage({ isEditable }) {
         })
     }, []);
 
+    const logOut = async () => {
+        await auth.signOut();
+        navigate("/")
+    }
+
     return <>
         <header className="ProfilePage-header">
         <div>
@@ -67,6 +73,7 @@ export default function ProfilePage({ isEditable }) {
         <div>userId: {userId}</div>
 
         {isEditable ? <p>Editable!</p> : <p>NOT Editable!</p>}
+        {isEditable ? <button onClick={logOut}>Log Out</button> : null}
         {userData !== null ?
             <>
                 <p>Name: {userData.name}</p>
