@@ -4,7 +4,6 @@ import {set, get, ref} from "firebase/database";
 import {auth, database} from "../FirebaseConfig.js";
 import {useNavigate} from "react-router-dom";
 import'./LoginPage.css';
-import deskimage from "../images/desk1.jpg";
 
 
 export default function LoginPage() {
