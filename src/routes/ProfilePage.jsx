@@ -113,10 +113,6 @@ export default function ProfilePage({ isEditable }) {
         {/*<div>userId: {userId}</div>*/}
 
         {/*{isEditable ? <p>Editable!</p> : <p>NOT Editable!</p>}*/}
-        {isEditable ? <button onClick={logOut}>Log Out</button> : null}
-        {isEditable ? <>
-            <p>Link to share: <a href={getShareLink()}>{getShareLink()}</a></p>
-        </> : null}
         {userData !== null ?
             <>
                 {/*<p>Name: {userData.name}</p>*/}
@@ -126,6 +122,10 @@ export default function ProfilePage({ isEditable }) {
                 {isEditable ? <button onClick={addNewGoal}>Add new goal</button> : null}
             </>
         : null}
+            {isEditable ? <>
+                <p>Link to share: <a href={getShareLink()}>{getShareLink()}</a></p>
+            </> : null}
+            {isEditable ? <button onClick={logOut}>Log Out</button> : null}
         </header>
     </>
 }
