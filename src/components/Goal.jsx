@@ -22,10 +22,6 @@ export default function Goal({ goalData, uid, index, isEditable }) {
 
     let lastCompleteDateString =  month + " " + date + ", " + year;
 
-    if (lastCompletionDate.toDateString() === new Date(0).toDateString()) {
-        lastCompleteDateString = "Never";
-    }
-
     // Streak is broken if NOT complete AND if NOT previous day
     const isStreakBroken = !isComplete &&
         !(previousDate.getFullYear() === lastCompletionDate.getFullYear() &&
@@ -46,10 +42,9 @@ export default function Goal({ goalData, uid, index, isEditable }) {
     }
 
     return <li style={{backgroundColor: isComplete ? "#C2E2C5" : "lightgray"}}>
-
         <header className="Goal-header">
-            <div>Goal: {goalData.name}</div>
-            <div>Streak: {goalData.streak}</div>
+            <div>{goalData.name}</div>
+            <div>Streak: {goalData.streak}{goalData.streak >= 1 ? "🔥" : ""}</div>
             {goalData.lastdate > 1000000 ? <div>Last Completed: {lastCompleteDateString}</div> : null}
             {isEditable && !isComplete ?
                 <button type="button" className="btn btn-light" onClick={completeGoal}>Complete</button>
