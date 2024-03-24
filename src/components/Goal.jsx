@@ -42,13 +42,16 @@ export default function Goal({ goalData, uid, index, isEditable }) {
         await set(streakRef, isStreakBroken ? 1 : goalData.streak + 1)
     }
 
-    return <li style={{backgroundColor: isComplete ? "lightgreen" : "lightgray"}}>
-        <div>UID: {uid}</div>
-        <div>name: {goalData.name}</div>
-        <div>streak: {goalData.streak}</div>
-        <div>last completion date: {lastCompleteDateString}</div>
-        {isEditable && !isComplete ?
-            <button onClick={completeGoal}>Complete</button>
-        : null}
+    return <li style={{backgroundColor: isComplete ? "#C2E2C5" : "lightgray"}}>
+
+        <header className="Goal-header">
+            <div>Goal: {goalData.name}</div>
+            <div>Streak: {goalData.streak}</div>
+            <div>Last Completed: {lastCompleteDateString}</div>
+            {isEditable && !isComplete ?
+                <button onClick={completeGoal}>Complete</button>
+                : null}
+        </header>
     </li>
+
 }
