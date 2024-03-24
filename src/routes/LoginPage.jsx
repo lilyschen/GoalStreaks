@@ -32,7 +32,7 @@ export default function LoginPage() {
                 const user = userCredential.user
                 console.log(user);
                 await makeInitialDatabaseEntry(user, username.trim().toLowerCase())
-                navigate(username.trim() + "/edit");
+                navigate(username.trim().toLowerCase() + "/edit");
             }).catch((error) => {
                 alert("Error: " + error.message);
             })

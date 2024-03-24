@@ -14,7 +14,7 @@ import { FacebookShareButton, FacebookIcon, TwitterShareButton, TwitterIcon,
  * @return {Promise<{userId: *}>}
  */
 export async function loader({ params }) {
-    const userId = params.userId;
+    const userId = params.userId.toLowerCase();
     return { userId };
 }
 
