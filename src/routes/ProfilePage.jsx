@@ -4,6 +4,9 @@ import {useEffect, useState} from "react";
 import {auth, database} from "../FirebaseConfig.js";
 import'./ProfilePage.css';
 import GoalList from "../components/GoalList.jsx";
+import { FacebookShareButton, FacebookIcon, TwitterShareButton, TwitterIcon,
+    WhatsappShareButton, WhatsappIcon, EmailShareButton,
+    EmailIcon, RedditShareButton, RedditIcon } from 'react-share';
 
 /**
  * Function to get the userID from the URL
@@ -136,6 +139,24 @@ export default function ProfilePage({ isEditable }) {
                 <p>Link to share: <a href={getShareLink()}>{getShareLink()}</a>
                     <button onClick={handleCopy}>Copy Link</button>
                 </p>
+                <div>
+                    <FacebookShareButton url={getShareLink()}>
+                        <FacebookIcon size={32} round={true}/>
+                    </FacebookShareButton>
+                    <TwitterShareButton url={getShareLink()}>
+                        <TwitterIcon size={32} round={true}/>
+                    </TwitterShareButton>
+                    <WhatsappShareButton url={getShareLink()}>
+                        <WhatsappIcon size={32} round={true}/>
+                    </WhatsappShareButton>
+                    <EmailShareButton url={getShareLink()}>
+                        <EmailIcon size={32} round={true}/>
+                    </EmailShareButton>
+                    <RedditShareButton url={getShareLink()}>
+                        <RedditIcon size={32} round={true}/>
+                    </RedditShareButton>
+                </div>
+
             </> : null}
             {isEditable ? <button onClick={logOut}>Log Out</button> : null}
         </header>
