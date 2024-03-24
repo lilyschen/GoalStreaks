@@ -1,0 +1,26 @@
+.ProfilePage {
+    text-align: center;
+}
+
+.ProfilePage-header {
+    background-image: url("../images/desk1.jpg");
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: #75979C;
+    font-family: Gill Sans, sans-serif;
+    font-weight: bold;
+}
+
+button {
+    margin: 5px;
+    padding: 6px;
+    border-radius: 5px 10px;
+}
+
+button:hover {
+    background-color: #75979C;
+}

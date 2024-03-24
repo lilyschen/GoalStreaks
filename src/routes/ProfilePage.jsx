@@ -69,9 +69,10 @@ export default function ProfilePage({ isEditable }) {
     // }, [])
 
     return <>
+        <header className="ProfilePage-header">
         <div>
             <h1>
-                GoalStreak
+                {userId.charAt(0).toUpperCase() + userId.substring(1)}'s GoalStreak
             </h1>
         </div>
         <div>userId: {userId}</div>
@@ -80,5 +81,6 @@ export default function ProfilePage({ isEditable }) {
         {userData !== null ?
             <div>TEST{userData.name}</div>
         : null}
+        </header>
     </>
 }
