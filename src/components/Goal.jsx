@@ -15,7 +15,13 @@ export default function Goal({ goalData, uid, index, isEditable }) {
         currentDate.getFullYear() === lastCompletionDate.getFullYear() &&
         currentDate.getMonth() === lastCompletionDate.getMonth() &&
         currentDate.getDate() === lastCompletionDate.getDate();
-    const lastCompleteDateString = lastCompletionDate.toLocaleDateString()
+    // const lastCompleteDateString = lastCompletionDate.toLocaleDateString()
+
+    const month = lastCompletionDate.toLocaleString('default', {month: 'long'});
+    const date = lastCompletionDate.getDate()
+    const year = lastCompletionDate.getFullYear();
+    const lastCompleteDateString =  month + " " + date + ", " + year;
+
 
     // Streak is broken if NOT complete AND if NOT previous day
     const isStreakBroken = !isComplete &&
