@@ -78,16 +78,16 @@ export default function ProfilePage({ isEditable }) {
                 {userId.charAt(0).toUpperCase() + userId.substring(1)}'s GoalStreak
             </h1>
         </div>
-        <div>userId: {userId}</div>
+        {/*<div>userId: {userId}</div>*/}
 
-        {isEditable ? <p>Editable!</p> : <p>NOT Editable!</p>}
+        {/*{isEditable ? <p>Editable!</p> : <p>NOT Editable!</p>}*/}
         {isEditable ? <button onClick={logOut}>Log Out</button> : null}
         {isEditable ? <>
             <p>Link to share: <a href={getShareLink()}>{getShareLink()}</a></p>
         </> : null}
         {userData !== null ?
             <>
-                <p>Name: {userData.name}</p>
+                {/*<p>Name: {userData.name}</p>*/}
                 <GoalList goals={userData.goals} uid={userData.uid} isEditable={isEditable}/>
                 <button>Add new goal</button>
             </>
