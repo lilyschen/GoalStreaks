@@ -21,6 +21,14 @@ async function getUID(userId) {
     return uidSnapshot.val();
 }
 
+function getShareLink() {
+    const link = window.location.href
+    const lastSlashIndex = link.lastIndexOf('/');
+    if (lastSlashIndex !== -1) {
+        return link.substring(0, lastSlashIndex);
+    }
+}
+
 /**
  * ProfilePage that displays the habit/goal information for a user
  *
@@ -74,6 +82,9 @@ export default function ProfilePage({ isEditable }) {
 
         {isEditable ? <p>Editable!</p> : <p>NOT Editable!</p>}
         {isEditable ? <button onClick={logOut}>Log Out</button> : null}
+        {isEditable ? <>
+            <p>Link to share: <a href={getShareLink()}>{getShareLink()}</a></p>
+        </> : null}
         {userData !== null ?
             <>
                 <p>Name: {userData.name}</p>
