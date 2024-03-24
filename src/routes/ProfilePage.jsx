@@ -92,8 +92,8 @@ export default function ProfilePage({ isEditable }) {
             indexToInsert = goalSnapshot.val().length;
         }
 
-        await set(child(goalRef, "" + indexToInsert), goalObject).catch((error) => {
-            alert(error)
+        await set(child(goalRef, "" + indexToInsert), goalObject).catch(() => {
+            alert("You are not authenticated to add a new goal!")
             return
         })
     }

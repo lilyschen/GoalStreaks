@@ -36,9 +36,8 @@ export default function Goal({ goalData, uid, index, isEditable }) {
         const streakRef = ref(database,
             "data/" + uid + "/goals/" + index + "/streak");
 
-        await set(dateRef, currentDate.getTime()).catch((error) => {
-            alert(error)
-            return
+        await set(dateRef, currentDate.getTime()).catch((e) => {
+            alert("You are not authenticated to edit this!")
         })
         await set(streakRef, isStreakBroken ? 1 : goalData.streak + 1)
     }

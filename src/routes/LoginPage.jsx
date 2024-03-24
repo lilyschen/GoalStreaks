@@ -23,8 +23,6 @@ export default function LoginPage() {
             return
         }
 
-        alert("signing in user!");
-
         let fakeEmail = username.trim() + "@goalstreaks.com";
         let func = isSignUp ? createUserWithEmailAndPassword : signInWithEmailAndPassword;
 
@@ -36,7 +34,7 @@ export default function LoginPage() {
                 await makeInitialDatabaseEntry(user, username.trim())
                 navigate(username.trim() + "/edit");
             }).catch((error) => {
-                alert(error.message);
+                alert("Error: " + error.message);
             })
     };
 
@@ -50,7 +48,6 @@ export default function LoginPage() {
         }
 
         await set(userDatabaseRef, user.uid);
-
         const dataDatabaseRef = ref(database, "data/" + user.uid);
         await set(dataDatabaseRef, {
             name: "Unnamed"
