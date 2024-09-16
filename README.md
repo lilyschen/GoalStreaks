@@ -11,7 +11,7 @@ To use GoalStreak:
 - mark each goal as you complete them each day to build up your goal streaks!
 - share your personal GoalStreak profile link with friends to view each others' progress
 
-[Click here to visit the published website!](https://6600672589da710897192d4a--zingy-cuchufli-9e28d9.netlify.app)
+[Click here to visit the published website!](https://zingy-cuchufli-9e28d9.netlify.app)
 
 <p align="center">
   <img src="readme_assets/screenshot.png" width="600px" style="margin: 0 auto" />
